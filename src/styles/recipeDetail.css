@@ -1,0 +1,71 @@
+@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;600;700&display=swap");
+
+.recipeDetail {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #f6f6f6;
+  min-height: 90vh;
+  font-family: "Raleway", sans-serif;
+}
+
+.recipeDetail__heading {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-end;
+  border-bottom: 3px solid coral;
+  padding: 2rem;
+  padding-bottom: 0;
+  min-width: 50vw;
+  margin-top: 2rem;
+  background: white;
+}
+
+.recipeDetail__heading > h3 {
+  font-size: 2rem;
+  text-transform: uppercase;
+}
+
+.recipeDetail__header {
+  display: flex;
+  justify-content: space-between;
+  min-width: 30vw;
+}
+
+.recipeDetail__main {
+  display: flex;
+  justify-content: space-between;
+  padding: 2rem;
+  min-width: 50vw;
+}
+
+.recipeDetail__list {
+  list-style-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBkPSJNNS40OCAxMC4wODlsMS41ODMtMS40NjRjMS44NTQuODk2IDMuMDI4IDEuNTc4IDUuMTEgMy4wNjMgMy45MTYtNC40NDIgNi41MDMtNi42OTYgMTEuMzExLTkuNjg4bC41MTYgMS4xODZjLTMuOTY1IDMuNDYtNi44NyA3LjMxNC0xMS4wNTEgMTQuODE0LTIuNTc5LTMuMDM4LTQuMzAxLTQuOTc0LTcuNDY5LTcuOTExem0xNC40MDcuNTU3Yy4wNjcuNDQzLjExMy44OTMuMTEzIDEuMzU0IDAgNC45NjItNC4wMzggOS05IDlzLTktNC4wMzgtOS05IDQuMDM4LTkgOS05YzEuOTcxIDAgMy43OS42NDQgNS4yNzQgMS43MjMuNTIxLS40NDYgMS4wNTItLjg4MSAxLjYtMS4zMDMtMS44ODQtMS41MTEtNC4yNzEtMi40Mi02Ljg3NC0yLjQyLTYuMDc1IDAtMTEgNC45MjUtMTEgMTFzNC45MjUgMTEgMTEgMTEgMTEtNC45MjUgMTEtMTFjMC0xLjE3OS0uMTktMi4zMTMtLjUzNC0zLjM3OC0uNTI4LjYzMy0xLjA1MiAxLjMwNS0xLjU3OSAyLjAyNHoiLz48L3N2Zz4=");
+  padding: 2rem 1rem;
+  background: white;
+  min-width: 30%;
+}
+
+.recipeDetail__title {
+  border-bottom: 1.5px solid coral;
+}
+
+.recipeDetail__list > ul > li {
+  padding: 0.6rem 0;
+}
+
+.recipeDetail__method {
+  padding: 2rem 1rem;
+  background: white;
+  min-width: 60%;
+}
+
+.recipeDetail__step {
+  padding: 1rem 0;
+}
+
+.recipeDetail__comments > textarea {
+  margin: 0px;
+  width: 808px;
+  height: 96px;
+}

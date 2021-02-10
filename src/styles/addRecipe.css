@@ -1,0 +1,74 @@
+.addRecipe {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #f6f6f6;
+  padding: 3rem;
+}
+
+.recipe-info {
+  background: white;
+  padding: 3rem;
+  padding-top: 2rem;
+}
+
+.recipe-info > label > input {
+  padding: 0.5rem;
+  background: #f6f6f6;
+  color: #757575;
+}
+
+.addRecipe__option--default {
+  background: #f6f6f6;
+  color: #757575;
+  padding: 0.1rem 0.5rem;
+  font-size: 1.2rem;
+}
+
+::placeholder {
+  color: #757575;
+  font-size: 1.2rem;
+}
+
+.recipe-info > label {
+  margin: 0 1rem;
+}
+
+.ingredients-info {
+  background: white;
+  padding: 3rem;
+  padding-top: 2rem;
+  margin-top: 2rem;
+}
+
+.recipe-text {
+  background: white;
+  padding: 3rem;
+  padding-top: 2rem;
+  margin-top: 2rem;
+}
+
+.recipe-text > label > textarea {
+  resize: none;
+}
+
+.recipe-text > label {
+  display: flex;
+  flex-direction: column;
+}
+
+.btn {
+  background: coral;
+  color: white;
+}
+
+.btn-submit {
+  padding: 1rem;
+  margin-top: 1rem;
+  background: coral;
+  color: white;
+}
+
+.method {
+  white-space: pre-line;
+}

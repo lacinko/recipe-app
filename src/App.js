@@ -1,23 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import { useContext } from "react";
+import { AddRecipe } from "./pages/addRecipe";
+import { RecipeContext } from "./recipeContext";
+import { Route, Switch } from "react-router-dom";
+import { Navbar } from "./components/Navbar";
+import { Recipes } from "./pages/recipes";
+import { RecipeDetail } from "./pages/recipeDetail";
 
 function App() {
+  const { addNewRecipe, recipesDatabase, editRecipe } = useContext(
+    RecipeContext
+  );
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Navbar />
+      <Switch>
+        <Route path="/add-recipe">
+          <AddRecipe addNewRecipe={addNewRecipe} recipes={recipesDatabase} />
+        </Route>
+        <Route exact path="/recipes">
+          <Recipes recipes={recipesDatabase} />
+        </Route>
+        <Route path="/recipes/:recipeId">
+          <RecipeDetail recipes={recipesDatabase} editRecipe={editRecipe} />
+        </Route>
+      </Switch>
     </div>
   );
 }
