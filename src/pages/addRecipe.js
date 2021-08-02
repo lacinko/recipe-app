@@ -3,6 +3,8 @@ import "../styles/addRecipe.css";
 import { v4 as uuidv4 } from "uuid";
 
 export const AddRecipe = ({ addNewRecipe }) => {
+  const [message, setMessage] = useState("");
+  const [error, setError] = useState("");
   const [inputTxt, setInputTxt] = useState({
     id: uuidv4(),
     date: new Date().toDateString(),
@@ -25,20 +27,27 @@ export const AddRecipe = ({ addNewRecipe }) => {
     }));
   }
 
-  function onSubmit(e) {
-    addNewRecipe(inputTxt);
-    setInputTxt({
-      id: uuidv4(),
-      date: new Date().toDateString(),
-      title: "",
-      prepTime: "",
-      rations: "",
-      difficulty: "",
-      ingredient: "",
-      listOfIngredients: [],
-      step: "",
-      method: [],
-    });
+  async function onSubmit(e) {
+    e.preventDefault();
+    try {
+      await addNewRecipe(inputTxt);
+      setInputTxt({
+        id: uuidv4(),
+        date: new Date().toDateString(),
+        title: "",
+        prepTime: "",
+        rations: "",
+        difficulty: "",
+        ingredient: "",
+        listOfIngredients: [],
+        step: "",
+        method: [],
+        note: [],
+      });
+      setMessage("Recipe was added sucefully!");
+    } catch (error) {
+      setError("Failed to added the recipe!");
+    }
   }
 
   function addIngToList(e) {
@@ -231,8 +240,9 @@ export const AddRecipe = ({ addNewRecipe }) => {
         <button className="btn-submit" onClick={onSubmit} type="submit">
           Save recipe!
         </button>
+        {error && <h3>{error}</h3>}
+        {message && <h3>{message}</h3>}
       </div>
-      <div></div>
     </div>
   );
 };

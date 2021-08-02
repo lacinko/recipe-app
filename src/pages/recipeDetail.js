@@ -1,13 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import "../styles/recipeDetail.css";
+import { updateRecipeDB } from "../services/firestore";
 
 export const RecipeDetail = ({ recipes, editRecipe }) => {
+  console.log(recipes);
   const { recipeId } = useParams();
   const [recipe, setRecipe] = useState(
     recipes.find((recipe) => recipe.id === recipeId)
   );
-  //const recipe = recipes.find((recipe) => recipe.id === recipeId);
+  console.log("Length" + JSON.stringify(recipe));
+  /*const [sortedArr, setSortedArr] = useState(
+    JSON.parse(localStorage.getItem("recipes"))
+  );
+  const recipe = sortedArr.find((recipe) => recipe.id === recipeId);*/
   const [note, setNote] = useState("");
 
   function handleChange(e) {
@@ -15,10 +21,19 @@ export const RecipeDetail = ({ recipes, editRecipe }) => {
     setNote(value);
   }
 
-  function submitNote() {
-    editRecipe(note, recipeId);
+  function submitNote(e) {
+    //editRecipe(note, recipeId);
+    updateRecipeDB(note, recipeId);
+    editRecipe();
+    //setSortedArr(JSON.parse(localStorage.getItem("recipes")));
     setNote("");
   }
+  /*
+  useEffect(() => {
+    setNote("");
+    console.log(note);
+  }, [sortedArr]);
+*/
 
   return (
     <div className="recipeDetail">
@@ -59,7 +74,12 @@ export const RecipeDetail = ({ recipes, editRecipe }) => {
         </div>
       </div>
       <div className="recipeDetail__comments">
-        {recipe.note ? recipe.note.map((note) => <p>{note}</p>) : ""}
+        {recipe.note
+          ? recipe.note.map((note, idx) => (
+              <p key={`ID${note}${idx}`}>{note}</p>
+            ))
+          : "<h2>No Comments yet!</h2>"}
+
         <h3>Add a note</h3>
         <textarea name="note" id="" onChange={handleChange}></textarea>
         <button onClick={submitNote}>ADD NOTE</button>

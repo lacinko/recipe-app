@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "../styles/recipes.css";
+import { updateRecipesDB } from "../services/firestore";
 
 export const Recipes = ({ recipes }) => {
   const [searchValue, setSearchValue] = useState({
@@ -23,7 +24,7 @@ export const Recipes = ({ recipes }) => {
     switch (e.target.name) {
       case "prepTime":
         if (searchValue.isSorted) {
-          sortedRecipes = [...recipes].sort((a, b) =>
+          sortedRecipes = [...sortedArr].sort((a, b) =>
             parseInt(a[e.target.name]) > parseInt(b[e.target.name]) ? -1 : 1
           );
           setSearchValue((prevState) => ({
@@ -31,7 +32,7 @@ export const Recipes = ({ recipes }) => {
             isSorted: !prevState.isSorted,
           }));
         } else {
-          sortedRecipes = [...recipes].sort((a, b) =>
+          sortedRecipes = [...sortedArr].sort((a, b) =>
             parseInt(a[e.target.name]) > parseInt(b[e.target.name]) ? 1 : -1
           );
           setSearchValue((prevState) => ({
@@ -43,7 +44,7 @@ export const Recipes = ({ recipes }) => {
         break;
       case "difficulty":
         if (searchValue.isSorted) {
-          sortedRecipes = [...recipes].sort((a, b) =>
+          sortedRecipes = [...sortedArr].sort((a, b) =>
             a[e.target.name] === "Beginner"
               ? -1
               : b[e.target.name] === "Expert"
@@ -55,7 +56,7 @@ export const Recipes = ({ recipes }) => {
             isSorted: !prevState.isSorted,
           }));
         } else {
-          sortedRecipes = [...recipes].sort((a, b) =>
+          sortedRecipes = [...sortedArr].sort((a, b) =>
             a[e.target.name] === "Beginner"
               ? 1
               : b[e.target.name] === "Expert"
@@ -71,7 +72,7 @@ export const Recipes = ({ recipes }) => {
         break;
       default:
         if (searchValue.isSorted) {
-          sortedRecipes = [...recipes].sort((a, b) =>
+          sortedRecipes = [...sortedArr].sort((a, b) =>
             a[e.target.name] > b[e.target.name] ? -1 : 1
           );
           setSearchValue((prevState) => ({
@@ -79,7 +80,7 @@ export const Recipes = ({ recipes }) => {
             isSorted: !prevState.isSorted,
           }));
         } else {
-          sortedRecipes = [...recipes].sort((a, b) =>
+          sortedRecipes = [...sortedArr].sort((a, b) =>
             a[e.target.name] > b[e.target.name] ? 1 : -1
           );
           setSearchValue((prevState) => ({
@@ -95,7 +96,7 @@ export const Recipes = ({ recipes }) => {
   useEffect(() => {
     searchValue.text
       ? setSortedArr(
-          [...recipes].filter((recipe) =>
+          [...sortedArr].filter((recipe) =>
             recipe.title.toLowerCase().includes(searchValue.text.toLowerCase())
           )
         )
@@ -124,20 +125,22 @@ export const Recipes = ({ recipes }) => {
         </button>
       </div>
       <ul className="recipes-list">
-        {sortedArr.map((recipe, idx) => (
-          <li key={recipe.id}>
-            <div className="recipes-top">
-              <Link className="recipes__link" to={`/recipes/${recipe.id}`}>
-                <h3>{recipe.title}</h3>
-              </Link>
-              <div className="recipes-top-info">
-                <h5>Preparation time: {recipe.prepTime + " min"}</h5>
-                <h5>Difficulty level: {recipe.difficulty}</h5>
-                <h5>Number of servings: {recipe.rations}</h5>
-              </div>
-            </div>
-          </li>
-        ))}
+        {sortedArr
+          ? sortedArr.map((recipe, idx) => (
+              <li key={recipe.id}>
+                <div className="recipes-top">
+                  <Link className="recipes__link" to={`/recipes/${recipe.id}`}>
+                    <h3>{recipe.title}</h3>
+                  </Link>
+                  <div className="recipes-top-info">
+                    <h5>Preparation time: {recipe.prepTime + " min"}</h5>
+                    <h5>Difficulty level: {recipe.difficulty}</h5>
+                    <h5>Number of servings: {recipe.rations}</h5>
+                  </div>
+                </div>
+              </li>
+            ))
+          : "<h2>NO DATA</h2>"}
       </ul>
     </div>
   );

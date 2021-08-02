@@ -1,4 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useContext } from "react";
+import firebase from "firebase/app";
+import "firebase/auth";
 
 const RecipeContext = React.createContext();
 
@@ -16,14 +18,14 @@ function RecipeContextProvider(props) {
   }
 
   function editRecipe(value, id) {
-    let recipesCopy = JSON.parse(localStorage.getItem("recipes"));
+    let recipesCopy = [...JSON.parse(localStorage.getItem("recipes"))];
     recipesCopy = recipesCopy.map((recipe) =>
       recipe.id === id ? { ...recipe, note: [...recipe.note, value] } : recipe
     );
-    setRecipesDatabase(recipesCopy);
+    setRecipesDatabase(
+      localStorage.setItem("recipes", JSON.stringify(recipesCopy))
+    );
   }
-
-  useEffect(() => {}, [recipesDatabase]);
 
   return (
     <RecipeContext.Provider
