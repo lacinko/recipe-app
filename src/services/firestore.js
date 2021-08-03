@@ -24,38 +24,3 @@ export const auth = firebaseConfig.auth();
 export default firebaseConfig;
 
 export const db = firebase.firestore();
-
-export const addRecipeToDB = (recipe) => {
-  return db
-    .collection("recipesDB")
-    .doc(recipe.id)
-    .set(
-      recipe,
-      (recipe.date = firebase.firestore.FieldValue.serverTimestamp())
-    );
-};
-
-export const updateRecipesDB = async () => {
-  const data = [];
-  const call = await db
-    .collection("recipesDB")
-    .get()
-    .then((querySnapshot) => {
-      querySnapshot.forEach((doc) => {
-        console.log(doc.id, " => ", doc.data());
-        data.push(doc.data());
-      });
-    });
-  return data;
-};
-
-export const updateRecipeDB = (noteTxt, id) => {
-  const recipesDB = db.collection("recipesDB").doc(id);
-  recipesDB.update({
-    note: firebase.firestore.FieldValue.arrayUnion(noteTxt),
-  });
-};
-
-export const streamRecipesDB = (observer) => {
-  return db.collection("recipesDB").onSnapshot(observer);
-};

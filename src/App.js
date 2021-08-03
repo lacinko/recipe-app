@@ -1,20 +1,17 @@
-import { useContext, useEffect, useState } from "react";
 import { AddRecipe } from "./pages/addRecipe";
-import { RecipeContext } from "./recipeContext";
 import { Route, Switch } from "react-router-dom";
 import { Navbar } from "./components/Navbar";
 import { SignUp } from "./components/SignUp";
 import { PasswordReset } from "./components/PasswordReset";
 import { Recipes } from "./pages/recipes";
 import { RecipeDetail } from "./pages/recipeDetail";
-import { updateRecipesDB } from "./services/firestore";
-import * as FirestoreService from "./services/firestore";
 import { Login } from "./components/Login";
 import { UpdateProfile } from "./components/UpdateProfile";
 import { useDatabase } from "./contexts/DatabaseContext";
+import { PrivateRoute } from "./components/PrivateRoute";
 
 function App() {
-  const { recipes, addRecipeToDB } = useDatabase();
+  const { recipes, addRecipeToDB, updateRecipeDB } = useDatabase();
 
   return (
     <div className="App">
@@ -29,9 +26,7 @@ function App() {
         <Route path="/password-reset">
           <PasswordReset />
         </Route>
-        <Route path="/update-profile">
-          <UpdateProfile />
-        </Route>
+        <PrivateRoute path="/update-profile" component={UpdateProfile} />
         <Route path="/add-recipe">
           <AddRecipe addNewRecipe={addRecipeToDB} />
         </Route>
@@ -42,7 +37,7 @@ function App() {
           <RecipeDetail
             key={recipes ? "Nazdar" : "Neni"}
             recipes={recipes}
-            editRecipe=""
+            editRecipe={updateRecipeDB}
           />
         </Route>
       </Switch>

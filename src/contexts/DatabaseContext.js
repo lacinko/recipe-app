@@ -21,6 +21,15 @@ export const DatabaseProvider = ({ children }) => {
       );
   };
 
+  const updateRecipeDB = (noteTxt, id) => {
+    return db
+      .collection("recipesDB")
+      .doc(id)
+      .update({
+        note: firebase.firestore.FieldValue.arrayUnion(noteTxt),
+      });
+  };
+
   useEffect(() => {
     db.collection("recipesDB").onSnapshot((snapshot) => {
       setRecipes(snapshot.docs.map((doc) => doc.data()));
@@ -30,6 +39,7 @@ export const DatabaseProvider = ({ children }) => {
   const value = {
     addRecipeToDB,
     recipes,
+    updateRecipeDB,
   };
 
   return (
