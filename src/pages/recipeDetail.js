@@ -28,7 +28,7 @@ export const RecipeDetail = ({ recipes, editRecipe }) => {
     editRecipe(note, recipeId);
     setNote("");
   }
-
+  console.log(recipe);
   return (
     <div className="recipeDetail">
       <div className="recipeDetail__heading">
