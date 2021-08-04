@@ -21,7 +21,7 @@ export const Navbar = () => {
   return (
     <div className="navbar">
       <nav>
-        <Link className="logo-link" to="/sign-up">
+        <Link className="logo-link" to="/">
           <h1 className="logo">
             Digital CookBook <img src="/cookbook-logo.png" alt="logo" />
           </h1>

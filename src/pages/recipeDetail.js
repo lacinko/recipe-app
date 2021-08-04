@@ -1,19 +1,15 @@
-import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import React, { useState } from "react";
+import { useHistory, useParams } from "react-router-dom";
+import { useAuth } from "../contexts/AuthContext";
 import "../styles/recipeDetail.css";
-import { updateRecipeDB } from "../services/firestore";
 
 export const RecipeDetail = ({ recipes, editRecipe }) => {
-  console.log(recipes);
+  const { currentUser } = useAuth();
+  const history = useHistory();
   const { recipeId } = useParams();
   const [recipe, setRecipe] = useState(
     recipes.find((recipe) => recipe.id === recipeId)
   );
-  console.log("Length" + JSON.stringify(recipe));
-  /*const [sortedArr, setSortedArr] = useState(
-    JSON.parse(localStorage.getItem("recipes"))
-  );
-  const recipe = sortedArr.find((recipe) => recipe.id === recipeId);*/
   const [note, setNote] = useState("");
 
   function handleChange(e) {
@@ -22,19 +18,17 @@ export const RecipeDetail = ({ recipes, editRecipe }) => {
   }
 
   function submitNote(e) {
-    //editRecipe(note, recipeId);
-    updateRecipeDB(note, recipeId);
-    editRecipe();
-    //setSortedArr(JSON.parse(localStorage.getItem("recipes")));
+    if (!currentUser) {
+      return history.push("/");
+    }
+    setRecipe((prevRecipe) => ({
+      ...prevRecipe,
+      note: [...recipe.note, note],
+    }));
+    editRecipe(note, recipeId);
     setNote("");
   }
-  /*
-  useEffect(() => {
-    setNote("");
-    console.log(note);
-  }, [sortedArr]);
-*/
-
+  console.log(recipe);
   return (
     <div className="recipeDetail">
       <div className="recipeDetail__heading">
@@ -81,7 +75,12 @@ export const RecipeDetail = ({ recipes, editRecipe }) => {
           : "<h2>No Comments yet!</h2>"}
 
         <h3>Add a note</h3>
-        <textarea name="note" id="" onChange={handleChange}></textarea>
+        <textarea
+          name="note"
+          id=""
+          onChange={handleChange}
+          value={note}
+        ></textarea>
         <button onClick={submitNote}>ADD NOTE</button>
       </div>
     </div>

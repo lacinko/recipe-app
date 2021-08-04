@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "../styles/recipes.css";
 
@@ -72,7 +72,7 @@ export const Recipes = ({ recipes }) => {
       default:
         if (searchValue.isSorted) {
           sortedRecipes = [...sortedArr].sort((a, b) =>
-            a[e.target.name] > b[e.target.name] ? -1 : 1
+            a.title.toLowerCase() > b.title.toLowerCase() ? -1 : 1
           );
           setSearchValue((prevState) => ({
             ...prevState,
@@ -80,7 +80,7 @@ export const Recipes = ({ recipes }) => {
           }));
         } else {
           sortedRecipes = [...sortedArr].sort((a, b) =>
-            a[e.target.name] > b[e.target.name] ? 1 : -1
+            a.title.toLowerCase() > b.title.toLowerCase() ? 1 : -1
           );
           setSearchValue((prevState) => ({
             ...prevState,
@@ -91,17 +91,6 @@ export const Recipes = ({ recipes }) => {
         break;
     }
   }
-
-  useEffect(() => {
-    searchValue.text
-      ? setSortedArr(
-          [...sortedArr].filter((recipe) =>
-            recipe.title.toLowerCase().includes(searchValue.text.toLowerCase())
-          )
-        )
-      : console.log("notext");
-    // eslint-disable-next-line
-  }, [searchValue.text]);
 
   return (
     <div className="recipes">
@@ -125,20 +114,35 @@ export const Recipes = ({ recipes }) => {
       </div>
       <ul className="recipes-list">
         {sortedArr
-          ? sortedArr.map((recipe, idx) => (
-              <li key={recipe.id}>
-                <div className="recipes-top">
-                  <Link className="recipes__link" to={`/recipes/${recipe.id}`}>
-                    <h3>{recipe.title}</h3>
-                  </Link>
-                  <div className="recipes-top-info">
-                    <h5>Preparation time: {recipe.prepTime + " min"}</h5>
-                    <h5>Difficulty level: {recipe.difficulty}</h5>
-                    <h5>Number of servings: {recipe.rations}</h5>
+          ? sortedArr
+              .filter((val) => {
+                if (searchValue.text == "") {
+                  return val;
+                } else if (
+                  val.title
+                    .toLowerCase()
+                    .includes(searchValue.text.toLowerCase())
+                ) {
+                  return val;
+                }
+              })
+              .map((recipe, idx) => (
+                <li key={recipe.id}>
+                  <div className="recipes-top">
+                    <Link
+                      className="recipes__link"
+                      to={`/recipes/${recipe.id}`}
+                    >
+                      <h3>{recipe.title}</h3>
+                    </Link>
+                    <div className="recipes-top-info">
+                      <h5>Preparation time: {recipe.prepTime + " min"}</h5>
+                      <h5>Difficulty level: {recipe.difficulty}</h5>
+                      <h5>Number of servings: {recipe.rations}</h5>
+                    </div>
                   </div>
-                </div>
-              </li>
-            ))
+                </li>
+              ))
           : "<h2>NO DATA</h2>"}
       </ul>
     </div>

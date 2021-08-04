@@ -1,8 +1,12 @@
 import React, { useEffect, useState } from "react";
 import "../styles/addRecipe.css";
 import { v4 as uuidv4 } from "uuid";
+import { useAuth } from "../contexts/AuthContext";
+import { useHistory } from "react-router-dom";
 
 export const AddRecipe = ({ addNewRecipe }) => {
+  const { currentUser } = useAuth();
+  const history = useHistory();
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
   const [inputTxt, setInputTxt] = useState({
@@ -17,6 +21,7 @@ export const AddRecipe = ({ addNewRecipe }) => {
     step: "",
     method: [],
     note: [],
+    createdBy: "",
   });
 
   function handleChange(e) {
@@ -29,6 +34,9 @@ export const AddRecipe = ({ addNewRecipe }) => {
 
   async function onSubmit(e) {
     e.preventDefault();
+    if (!currentUser) {
+      return history.push("/");
+    }
     try {
       await addNewRecipe(inputTxt);
       setInputTxt({
@@ -43,10 +51,12 @@ export const AddRecipe = ({ addNewRecipe }) => {
         step: "",
         method: [],
         note: [],
+        createdBy: "",
       });
       setMessage("Recipe was added sucefully!");
     } catch (error) {
       setError("Failed to added the recipe!");
+      console.log(error);
     }
   }
 
@@ -101,7 +111,14 @@ export const AddRecipe = ({ addNewRecipe }) => {
         break;
     }
   }
-
+  useEffect(() => {
+    if (currentUser) {
+      setInputTxt((prevInput) => ({
+        ...prevInput,
+        createdBy: currentUser.email,
+      }));
+    }
+  }, [currentUser]);
   useEffect(() => {}, [inputTxt]);
 
   return (
