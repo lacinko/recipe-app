@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "../styles/recipes.css";
-import { updateRecipesDB } from "../services/firestore";
 
 export const Recipes = ({ recipes }) => {
   const [searchValue, setSearchValue] = useState({
