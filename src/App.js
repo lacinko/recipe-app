@@ -12,20 +12,17 @@ import { PrivateRoute } from "./components/PrivateRoute";
 
 function App() {
   const { recipes, addRecipeToDB, updateRecipeDB } = useDatabase();
-
   return (
     <div className="App">
       <Navbar />
       <Switch>
-        <Route exact path="/">
-          <Login />
-        </Route>
-        <Route path="/sign-up">
-          <SignUp />
-        </Route>
-        <Route path="/password-reset">
-          <PasswordReset />
-        </Route>
+        <PrivateRoute exact path="/" isLogged={true} component={Login} />
+        <PrivateRoute path="/sign-up" isLogged={true} component={SignUp} />
+        <PrivateRoute
+          path="/password-reset"
+          isLogged={true}
+          component={PasswordReset}
+        />
         <PrivateRoute path="/update-profile" component={UpdateProfile} />
         <Route path="/add-recipe">
           <AddRecipe addNewRecipe={addRecipeToDB} />
@@ -35,7 +32,7 @@ function App() {
         </Route>
         <Route path="/recipes/:recipeId">
           <RecipeDetail
-            key={recipes ? "Nazdar" : "Neni"}
+            key={`randomKey`}
             recipes={recipes}
             editRecipe={updateRecipeDB}
           />

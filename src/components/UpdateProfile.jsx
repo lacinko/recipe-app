@@ -1,6 +1,7 @@
 import React, { useRef, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
+import { useDatabase } from "../contexts/DatabaseContext";
 import "../styles/UpdateProfile.css";
 
 export const UpdateProfile = () => {
@@ -8,6 +9,7 @@ export const UpdateProfile = () => {
   const passwordRef = useRef();
   const passwordConfirmRef = useRef();
   const { currentUser, updateEmail, updatePassword } = useAuth();
+  const { recipes } = useDatabase();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const history = useHistory();
@@ -44,6 +46,18 @@ export const UpdateProfile = () => {
 
   return (
     <div className="signup">
+      <h2>My Recipes</h2>
+      <ul>
+        {recipes &&
+          recipes
+            .filter((recipe) => recipe.createdBy === currentUser.email)
+            .map((recipe) => (
+              <li key={recipe.id}>
+                <Link to={`/recipes/${recipe.id}`}>{recipe.title}</Link>
+              </li>
+            ))}
+      </ul>
+
       <h2>Update Profile</h2>
       <form onSubmit={handleSubmit}>
         {error && <h2 style={{ color: "red" }}>{error}</h2>}

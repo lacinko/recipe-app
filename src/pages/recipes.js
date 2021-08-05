@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "../styles/recipes.css";
 
@@ -7,7 +7,7 @@ export const Recipes = ({ recipes }) => {
     text: "",
     isSorted: false,
   });
-  const [sortedArr, setSortedArr] = useState(recipes);
+  const [sortedArr, setSortedArr] = useState();
 
   function handleChange(e) {
     const { name, value } = e.target;
@@ -91,6 +91,10 @@ export const Recipes = ({ recipes }) => {
         break;
     }
   }
+
+  useEffect(() => {
+    setSortedArr(recipes);
+  }, [recipes]);
 
   return (
     <div className="recipes">

@@ -64,6 +64,27 @@
   padding: 1rem 0;
 }
 
+.recipeDetail__comments {
+  display: flex;
+  flex-direction: column;
+}
+
+.recipeDetail__comment {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: white;
+  margin-bottom: 1vh;
+}
+
+.recipeDetail__comment > span {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 100%;
+}
+
 .recipeDetail__comments > textarea {
   margin: 0px;
   width: 808px;
