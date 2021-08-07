@@ -52,7 +52,9 @@
   padding: 1vh 0.5vw;
   border-radius: 999px;
 }
-
+.recipes-menu > span > button:hover {
+  background: #f36666;
+}
 .recipes__link {
   font-size: 1.5rem;
   text-transform: uppercase;

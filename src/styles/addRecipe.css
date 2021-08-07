@@ -72,6 +72,12 @@
   width: 12vw;
 }
 
+.addRecipe__btn:hover,
+.addRecipe__btn--remove:hover,
+.addRecipe__btn-submit:hover {
+  background: #f36666;
+}
+
 .addRecipe__btn--remove {
   margin-left: 1vw;
   padding: 0.5vh 0;
@@ -91,7 +97,17 @@
 }
 @media (max-width: 480px) {
   .addRecipe {
-    width: 80vw;
+    width: 70vw;
     align-items: center;
+  }
+  .addRecipe__btn-submit {
+    width: 70vw;
+  }
+  .addRecipe__option--default {
+    width: 75vw;
+  }
+  .recipe-info > label > input {
+    width: 70vw;
+    margin: 1vh 0;
   }
 }

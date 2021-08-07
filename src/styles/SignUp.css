@@ -24,6 +24,10 @@ form {
   border-radius: 999px;
 }
 
+.signup__btn:hover {
+  background: #f36666;
+}
+
 .link-container > *,
 .forgot-password-container > * {
   text-decoration: none;

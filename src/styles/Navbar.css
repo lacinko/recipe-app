@@ -26,6 +26,11 @@
   color: #3a2e39;
 }
 
+.navbar__link:hover,
+.navbar__link:active {
+  color: #f15152;
+}
+
 .navbar__login-btn {
   background: #f15152;
   border: none;
@@ -34,6 +39,10 @@
   width: 15vw;
   font-weight: 500;
   color: #fdf7fa;
+}
+
+.navbar__login-btn:hover {
+  background: #f36666;
 }
 
 .navbar__logo-text {
