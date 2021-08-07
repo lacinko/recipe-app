@@ -3,8 +3,9 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 100%;
-  height: 80vh;
+  height: 98vh;
+  width: 50vw;
+  background: #f6f6f6;
 }
 
 form {
@@ -13,10 +14,30 @@ form {
   min-width: 20vw;
 }
 
-button {
+.signup__btn {
+  margin-top: 2vh;
   min-width: 20vw;
+  background: #f15152;
+  color: #fdf7fa;
+  border: none;
+  padding: 2vh 0.5vw;
+  border-radius: 999px;
 }
 
-input {
+.link-container > *,
+.forgot-password-container > * {
+  text-decoration: none;
+  color: #f15152;
+  font-weight: 500;
+}
+
+.signup > input {
   margin-bottom: 2vh;
+}
+
+@media (max-width: 480px) {
+  .signup {
+    height: 85vh;
+    width: 100%;
+  }
 }

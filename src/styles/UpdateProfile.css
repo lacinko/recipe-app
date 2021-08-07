@@ -1,0 +1,29 @@
+.myrecipes-container {
+  background: white;
+  width: 40vw;
+  padding: 1vh 2vw;
+}
+
+.myrecipes-container > ul {
+  list-style: none;
+}
+
+.myrecipes-container > ul > li > * {
+  text-decoration: none;
+  color: black;
+}
+
+.myrecipes-container > ul > li > *:hover {
+  border-bottom: 2px solid #f15152;
+}
+
+.update-profile-container {
+  margin-top: 2vh;
+  background: white;
+  padding: 1vh 2vw;
+}
+
+.cancel-btn > * {
+  text-decoration: none;
+  color: white;
+}

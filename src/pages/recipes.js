@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import SearchIcon from "@material-ui/icons/Search";
 import "../styles/recipes.css";
 
 export const Recipes = ({ recipes }) => {
@@ -99,22 +100,27 @@ export const Recipes = ({ recipes }) => {
   return (
     <div className="recipes">
       <div className="recipes-menu">
-        <input
-          type="text"
-          placeholder="Search for recipe"
-          onChange={handleChange}
-          value={searchValue.text}
-          name="text"
-        />
-        <button onClick={sortBy} name="name">
-          SORT BY NAME
-        </button>
-        <button onClick={sortBy} name="difficulty">
-          SORT BY DIFFICULTY
-        </button>
-        <button onClick={sortBy} name="prepTime">
-          SORT BY PREPARATION TIME
-        </button>
+        <div className="recipes__search-container">
+          <SearchIcon />
+          <input
+            type="text"
+            placeholder="Search for recipe"
+            onChange={handleChange}
+            value={searchValue.text}
+            name="text"
+          />
+        </div>
+        <span>
+          <button onClick={sortBy} name="name">
+            SORT BY NAME
+          </button>
+          <button onClick={sortBy} name="difficulty">
+            SORT BY DIFFICULTY
+          </button>
+          <button onClick={sortBy} name="prepTime">
+            SORT BY PREPARATION TIME
+          </button>
+        </span>
       </div>
       <ul className="recipes-list">
         {sortedArr

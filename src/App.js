@@ -9,35 +9,42 @@ import { Login } from "./components/Login";
 import { UpdateProfile } from "./components/UpdateProfile";
 import { useDatabase } from "./contexts/DatabaseContext";
 import { PrivateRoute } from "./components/PrivateRoute";
+import "./App.css";
 
 function App() {
   const { recipes, addRecipeToDB, updateRecipeDB } = useDatabase();
   return (
     <div className="App">
       <Navbar />
-      <Switch>
-        <PrivateRoute exact path="/" isLogged={true} component={Login} />
-        <PrivateRoute path="/sign-up" isLogged={true} component={SignUp} />
-        <PrivateRoute
-          path="/password-reset"
-          isLogged={true}
-          component={PasswordReset}
-        />
-        <PrivateRoute path="/update-profile" component={UpdateProfile} />
-        <Route path="/add-recipe">
-          <AddRecipe addNewRecipe={addRecipeToDB} />
-        </Route>
-        <Route exact path="/recipes">
-          <Recipes recipes={recipes} />
-        </Route>
-        <Route path="/recipes/:recipeId">
-          <RecipeDetail
-            key={`randomKey`}
-            recipes={recipes}
-            editRecipe={updateRecipeDB}
+      <div className="main-screen-container">
+        <Switch>
+          <PrivateRoute exact path="/" isLogged={true} component={Login} />
+          <PrivateRoute path="/sign-up" isLogged={true} component={SignUp} />
+          <PrivateRoute
+            path="/password-reset"
+            isLogged={true}
+            component={PasswordReset}
           />
-        </Route>
-      </Switch>
+          <PrivateRoute
+            path="/update-profile"
+            isLogged={false}
+            component={UpdateProfile}
+          />
+          <Route path="/add-recipe">
+            <AddRecipe addNewRecipe={addRecipeToDB} />
+          </Route>
+          <Route exact path="/recipes">
+            <Recipes recipes={recipes} />
+          </Route>
+          <Route path="/recipes/:recipeId">
+            <RecipeDetail
+              key={`randomKey`}
+              recipes={recipes}
+              editRecipe={updateRecipeDB}
+            />
+          </Route>
+        </Switch>
+      </div>
     </div>
   );
 }

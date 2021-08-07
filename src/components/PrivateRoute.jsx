@@ -12,6 +12,9 @@ export const PrivateRoute = ({ component: Component, isLogged, ...rest }) => {
         if (currentUser && isLogged) {
           return <Redirect to="/recipes" />;
         }
+        if (currentUser && !isLogged) {
+          return <Component {...props} />;
+        }
         if (!currentUser) {
           return <Component {...props} />;
         }

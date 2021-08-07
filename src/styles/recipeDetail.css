@@ -5,38 +5,50 @@
   flex-direction: column;
   align-items: center;
   background: #f6f6f6;
-  min-height: 90vh;
+  min-height: 98vh;
   font-family: "Raleway", sans-serif;
+  width: 50vw;
 }
 
 .recipeDetail__heading {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: flex-end;
-  border-bottom: 3px solid coral;
+  border-bottom: 3px solid #f15152;
   padding: 2rem;
   padding-bottom: 0;
-  min-width: 50vw;
   margin-top: 2rem;
+  width: 40vw;
   background: white;
 }
 
-.recipeDetail__heading > h3 {
+.recipeDetail__heading > span > h3 {
   font-size: 2rem;
   text-transform: uppercase;
+}
+
+.recipeDetail__header > span {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1vh 0.8vw;
+}
+
+.recipeDetail__header > span > h5 {
+  margin-left: 0.6vw;
 }
 
 .recipeDetail__header {
   display: flex;
   justify-content: space-between;
-  min-width: 30vw;
+  width: 25vw;
 }
 
 .recipeDetail__main {
   display: flex;
   justify-content: space-between;
   padding: 2rem;
-  min-width: 50vw;
+  width: 40vw;
 }
 
 .recipeDetail__list {
@@ -47,7 +59,7 @@
 }
 
 .recipeDetail__title {
-  border-bottom: 1.5px solid coral;
+  border-bottom: 2px solid #f15152;
 }
 
 .recipeDetail__list > ul > li {
@@ -60,6 +72,16 @@
   min-width: 60%;
 }
 
+.recipeDetail__btn {
+  margin-top: 2vh;
+  padding: 1.5vh 1vw;
+  font-weight: 600;
+  background: #f15152;
+  color: #fdf7fa;
+  border: none;
+  width: 12vw;
+}
+
 .recipeDetail__step {
   padding: 1rem 0;
 }
@@ -67,26 +89,44 @@
 .recipeDetail__comments {
   display: flex;
   flex-direction: column;
+  align-items: center;
+}
+
+.recipeDetail__comments > h3 {
+  align-self: flex-start;
+  margin-left: 2.5vw;
 }
 
 .recipeDetail__comment {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   background: white;
   margin-bottom: 1vh;
+  width: 90%;
 }
 
 .recipeDetail__comment > span {
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
-  width: 100%;
+  justify-content: flex-start;
+  margin: 1vh 1vw;
+}
+
+.recipeDetail__comment > span > strong {
+  color: #f15152;
+  align-self: flex-start;
+}
+
+.recipeDetail__comment > span > p {
+  align-self: flex-start;
+
+  margin: 0;
+  margin-left: 1vw;
 }
 
 .recipeDetail__comments > textarea {
+  resize: none;
   margin: 0px;
-  width: 808px;
+  width: 860px;
   height: 96px;
 }

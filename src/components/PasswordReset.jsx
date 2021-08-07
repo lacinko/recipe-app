@@ -28,21 +28,23 @@ export const PasswordReset = () => {
 
   return (
     <div className="signup">
-      <h2>Reset Password</h2>
-      <form onSubmit={handleSubmit}>
-        {error && <h2 style={{ color: "red" }}>{error}</h2>}
-        {message && <h2 style={{ color: "green" }}>{message}</h2>}
-        <label>Email</label>
-        <input type="email" name="email" required ref={emailRef} />
-        <button disabled={loading} type="submit">
-          Reset Password
-        </button>
-        <button disabled={loading} type="submit">
-          <Link to="/">Log In</Link>
-        </button>
-      </form>
-      <div className="link-container">
-        Need an account? <Link to="/sign-up">Sign Up</Link>
+      <div className="auth-container">
+        <h2>Reset Password</h2>
+        <form onSubmit={handleSubmit}>
+          {error && <h2 style={{ color: "red" }}>{error}</h2>}
+          {message && <h2 style={{ color: "green" }}>{message}</h2>}
+          <label>Email</label>
+          <input type="email" name="email" required ref={emailRef} />
+          <button className="reset-btn" disabled={loading} type="submit">
+            Reset Password
+          </button>
+        </form>
+        <div className="link-container">
+          Already have a account? <Link to="/">Log In</Link>
+        </div>
+        <div className="link-container">
+          Need an account? <Link to="/sign-up">Sign Up</Link>
+        </div>
       </div>
     </div>
   );

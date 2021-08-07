@@ -28,24 +28,26 @@ export const Login = () => {
 
   return (
     <div className="signup">
-      <h2>Log In</h2>
-      <form onSubmit={handleSubmit}>
-        {error && <h2 style={{ color: "red" }}>{error}</h2>}
-        <label>Email</label>
-        <input type="email" name="email" required ref={emailRef} />
+      <div className="auth-container">
+        <h2>Log In</h2>
+        <form onSubmit={handleSubmit}>
+          {error && <h2 style={{ color: "red" }}>{error}</h2>}
+          <label>Email</label>
+          <input type="email" name="email" required ref={emailRef} />
 
-        <label>Password</label>
-        <input type="password" name="password" required ref={passwordRef} />
+          <label>Password</label>
+          <input type="password" name="password" required ref={passwordRef} />
 
-        <button disabled={loading} type="submit">
-          Log In
-        </button>
-      </form>
-      <div className="link-container">
-        Need an account? <Link to="/sign-up">Sign Up</Link>
-      </div>
-      <div className="forgot-password-container">
-        Forgot password? <Link to="/password-reset">Reset</Link>
+          <button className="btn" disabled={loading} type="submit">
+            Log In
+          </button>
+        </form>
+        <div className="link-container">
+          Need an account? <Link to="/sign-up">Sign Up</Link>
+        </div>
+        <div className="forgot-password-container">
+          Forgot password? <Link to="/password-reset">Reset</Link>
+        </div>
       </div>
     </div>
   );

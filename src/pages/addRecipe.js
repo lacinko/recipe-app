@@ -124,7 +124,6 @@ export const AddRecipe = ({ addNewRecipe }) => {
   return (
     <div>
       <div className="addRecipe">
-        <h2>Add a new recipe</h2>
         <form className="addRecipeForm" onSubmit={onSubmit}>
           <div className="recipe-info">
             <h3>Recipe Info</h3>
@@ -184,7 +183,7 @@ export const AddRecipe = ({ addNewRecipe }) => {
                         onClick={deleteFromList}
                         id={idx}
                         name="ingredient"
-                        className="btn"
+                        className="addRecipe__btn addRecipe__btn--remove"
                         type="button"
                       >
                         X
@@ -193,25 +192,22 @@ export const AddRecipe = ({ addNewRecipe }) => {
                   ))
                 : ""}
             </ul>
-            <label>
-              List of ingredients:
-              <div>
-                <input
-                  type="text"
-                  name="ingredient"
-                  value={inputTxt.ingredient}
-                  onChange={handleChange}
-                />
-                <button
-                  onClick={addIngToList}
-                  name="ingredient"
-                  className="btn"
-                  type="button"
-                >
-                  ADD
-                </button>
-              </div>
-            </label>
+            <label>List of ingredients:</label>
+
+            <input
+              type="text"
+              name="ingredient"
+              value={inputTxt.ingredient}
+              onChange={handleChange}
+            />
+            <button
+              onClick={addIngToList}
+              name="ingredient"
+              className="addRecipe__btn"
+              type="button"
+            >
+              ADD
+            </button>
           </div>
           <div className="recipe-text">
             <h3>Preparation method</h3>
@@ -225,7 +221,7 @@ export const AddRecipe = ({ addNewRecipe }) => {
                         onClick={deleteFromList}
                         id={idx}
                         name="step"
-                        className="btn"
+                        className="addRecipe__btn addRecipe__btn--remove"
                         type="button"
                       >
                         X
@@ -246,7 +242,7 @@ export const AddRecipe = ({ addNewRecipe }) => {
               <button
                 onClick={addIngToList}
                 name="step"
-                className="btn"
+                className="addRecipe__btn"
                 type="button"
               >
                 ADD
@@ -254,7 +250,11 @@ export const AddRecipe = ({ addNewRecipe }) => {
             </label>
           </div>
         </form>
-        <button className="btn-submit" onClick={onSubmit} type="submit">
+        <button
+          className="addRecipe__btn addRecipe__btn-submit"
+          onClick={onSubmit}
+          type="submit"
+        >
           Save recipe!
         </button>
         {error && <h3>{error}</h3>}

@@ -46,40 +46,43 @@ export const UpdateProfile = () => {
 
   return (
     <div className="signup">
-      <h2>My Recipes</h2>
-      <ul>
-        {recipes &&
-          recipes
-            .filter((recipe) => recipe.createdBy === currentUser.email)
-            .map((recipe) => (
-              <li key={recipe.id}>
-                <Link to={`/recipes/${recipe.id}`}>{recipe.title}</Link>
-              </li>
-            ))}
-      </ul>
+      <div className="myrecipes-container">
+        <h2>My Recipes</h2>
+        <ul>
+          {recipes &&
+            recipes
+              .filter((recipe) => recipe.createdBy === currentUser?.email)
+              .map((recipe) => (
+                <li key={recipe.id}>
+                  <Link to={`/recipes/${recipe.id}`}>{recipe.title}</Link>
+                </li>
+              ))}
+        </ul>
+      </div>
+      <div className="update-profile-container">
+        <h2>Update Profile</h2>
+        <form onSubmit={handleSubmit}>
+          {error && <h2 style={{ color: "red" }}>{error}</h2>}
+          <label>Email</label>
+          <input type="email" name="email" ref={emailRef} />
 
-      <h2>Update Profile</h2>
-      <form onSubmit={handleSubmit}>
-        {error && <h2 style={{ color: "red" }}>{error}</h2>}
-        <label>Email</label>
-        <input type="email" name="email" ref={emailRef} />
+          <label>Password</label>
+          <input type="password" name="password" ref={passwordRef} />
 
-        <label>Password</label>
-        <input type="password" name="password" ref={passwordRef} />
-
-        <label>Password Confirmation</label>
-        <input
-          type="password"
-          name="passwordConfirmation"
-          ref={passwordConfirmRef}
-        />
-        <button disabled={loading} type="submit">
-          Update
-        </button>
-        <button disabled={loading}>
-          <Link to="/recipes">Cancel</Link>
-        </button>
-      </form>
+          <label>Password Confirmation</label>
+          <input
+            type="password"
+            name="passwordConfirmation"
+            ref={passwordConfirmRef}
+          />
+          <button className="btn" disabled={loading} type="submit">
+            Update
+          </button>
+          <button className="btn cancel-btn" disabled={loading}>
+            <Link to="/recipes">Cancel</Link>
+          </button>
+        </form>
+      </div>
     </div>
   );
 };

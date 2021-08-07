@@ -1,0 +1,21 @@
+.auth-container {
+  background: white;
+  padding: 3vh 3vw;
+}
+
+.btn {
+  margin-top: 2vh;
+  background: #f15152;
+  color: #fdf7fa;
+  border: none;
+  padding: 2vh 0.5vw;
+  border-radius: 999px;
+}
+
+@media (max-width: 480px) {
+  .auth-container {
+    width: 80%;
+    background: white;
+    padding: 3vh 3vw;
+  }
+}

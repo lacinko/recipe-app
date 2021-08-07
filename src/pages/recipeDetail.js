@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
+import TimerIcon from "@material-ui/icons/Timer";
+import SpeedIcon from "@material-ui/icons/Speed";
+import RestaurantIcon from "@material-ui/icons/Restaurant";
 import "../styles/recipeDetail.css";
 
 export const RecipeDetail = ({ recipes, editRecipe }) => {
@@ -33,13 +36,12 @@ export const RecipeDetail = ({ recipes, editRecipe }) => {
 
   const displayDate = (date) => {
     date = new Date(date.seconds * 1000);
-    const formattedDate = date.toLocaleDateString("en-SK", {
-      weekday: "long",
+    const formattedDate = date.toLocaleDateString("en-GB", {
       year: "numeric",
-      month: "long",
+      month: "numeric",
       day: "numeric",
     });
-    const formattedTime = date.toLocaleString("en-US", {
+    const formattedTime = date.toLocaleString("en-GB", {
       hour: "numeric",
       minute: "numeric",
       hour12: false,
@@ -57,11 +59,24 @@ export const RecipeDetail = ({ recipes, editRecipe }) => {
       {recipe ? (
         <>
           <div className="recipeDetail__heading">
-            <h3>{recipe.title}</h3>
+            <span>
+              <h3>{recipe.title}</h3>
+              <p>Author: {recipe?.createdBy}</p>
+            </span>
+
             <div className="recipeDetail__header">
-              <h5>Preparation time: {recipe.prepTime + " min"}</h5>
-              <h5>Difficulty level: {recipe.difficulty}</h5>
-              <h5>Number of servings: {recipe.rations}</h5>
+              <span>
+                <TimerIcon style={{ color: "#f15152" }} />
+                <h5> Preparation time: {recipe.prepTime + " min"}</h5>
+              </span>
+              <span>
+                <SpeedIcon style={{ color: "#f15152" }} />
+                <h5>Difficulty level: {recipe.difficulty}</h5>
+              </span>
+              <span>
+                <RestaurantIcon style={{ color: "#f15152" }} />
+                <h5>Number of servings: {recipe.rations}</h5>
+              </span>
             </div>
           </div>
           <div className="recipeDetail__main">
@@ -92,8 +107,9 @@ export const RecipeDetail = ({ recipes, editRecipe }) => {
               </ol>
             </div>
           </div>
-          <h3>Comments from users:</h3>
+
           <div className="recipeDetail__comments">
+            <h3>Comments from users</h3>
             {recipe.note
               ? recipe.note.map((note, idx) => (
                   <div className="recipeDetail__comment">
@@ -114,7 +130,9 @@ export const RecipeDetail = ({ recipes, editRecipe }) => {
               onChange={handleChange}
               value={note.text}
             ></textarea>
-            <button onClick={submitNote}>ADD NOTE</button>
+            <button className="recipeDetail__btn" onClick={submitNote}>
+              ADD NOTE
+            </button>
           </div>
         </>
       ) : (
